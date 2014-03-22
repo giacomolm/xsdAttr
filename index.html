@@ -1,0 +1,25 @@
+<html>
+<head><title>XSD.js</title>
+
+<script type="text/javascript" src="xsdAttr.js"></script>
+<script>
+
+	function search(attribute){	
+		var result = xsdAttr.getAttributes(xsdAttr.file,attribute);
+		document.getElementById('attrs').innerHTML = result;
+	};
+	
+	window.onload = function(){
+		document.getElementById('xsdSchema').onchange = function(e){xsdAttr.file = this.files[0].name};
+	}
+</script>
+
+</head>
+<body>
+	
+	Schema file<input type="file" id="xsdSchema"> (Schema in the same folder)<br><br>
+	Attribute<input id="field" type="text" /><input type="submit" value="search" onclick="search(document.getElementById('field').value)">
+	<div id="attrs"></div>
+
+</body>
+</html>
