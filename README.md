@@ -5,7 +5,7 @@ A small javascript library that given a particular schema retrieve all the attri
 
 Usage:
 
-		var result = xsdAttr.getAttributes(xsdAttr.file,attribute);
+		var result = xsdAttr.getAttributes(schemaFile,element);
 		
 		for(var propName in result) {
 		    if(result.hasOwnProperty(propName)) {
