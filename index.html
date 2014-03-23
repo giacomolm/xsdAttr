@@ -1,12 +1,17 @@
+<!DOCTYPE html>
 <html>
-<head><title>XSD.js</title>
+<head><title>xsdAttr.js</title>
 
 <script type="text/javascript" src="xsdAttr.js"></script>
 <script>
 
 	function search(attribute){	
 		var result = xsdAttr.getAttributes(xsdAttr.file,attribute);
-		document.getElementById('attrs').innerHTML = result;
+		for(var propName in result) {
+		    if(result.hasOwnProperty(propName)) {
+			console.log(propName);   
+		    }
+		}
 	};
 	
 	window.onload = function(){

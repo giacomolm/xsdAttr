@@ -31,7 +31,7 @@
 					  xmlDoc.loadXML(txt);
 					} 
 							
-					return xsdAttr.fn.fetchElement(xmlDoc, attributeName, "");
+					return xsdAttr.fn.fetchElement(xmlDoc, attributeName, new Object());
 				},
 				
 				fetchElement: function(xmlDoc, elName, result){
@@ -62,7 +62,7 @@
 					
 					for(i=0; i<xmlQuery.length; i++){
 						var name = xmlQuery[i].attributes.name;
-						result= result+" "+name.value;
+						result[name.value] = undefined;
 					}
 						
 					if(xmlExstension[0]){
