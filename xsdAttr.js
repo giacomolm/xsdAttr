@@ -23,7 +23,7 @@
 					var xmlDoc;
 					if (window.DOMParser){
 					  parser=new DOMParser();
-					  xmlDoc=parser.parseFromString(txt,"text/xml");
+					  xmlDoc=parser.parseFromString(txt,"text/xml");					  
 					}
 					else{ // Internet Explorer
 					  xmlDoc=new ActiveXObject("Microsoft.XMLDOM");
@@ -54,17 +54,40 @@
 						xmlExstension = xmlElement.getElementsByTagName('xs:extension');
 					}
 					
+					var xmlChoice;
+					if(xmlElement.getElementsByTagName('choice').length > 0){ //chrome case
+						xmlChoice = xmlElement.getElementsByTagName('choice');
+					}
+					else{
+						xmlChoice = xmlElement.getElementsByTagName('xs:choice');
+					}
+										
+					
+					for(i=0; i<xmlQuery.length; i++){
+						var name = xmlQuery[i].attributes.name;
+						result[name.value] = undefined;											
+					}	
+					
+					for(j=0; j<xmlChoice.length; j++){
+						for(k=0; k<xmlChoice[j].children.length; k++){					
+							if(result.choice == undefined){
+								result.choice= [];
+								result.choice[0] = xmlChoice[j].children[k].attributes[0].nodeValue.split(":")[1];
+							}
+							else{							
+								result.choice[result.choice.length];	
+								result.choice[k] = xmlChoice[j].children[k].attributes[0].nodeValue.split(":")[1];
+							}
+						}					
+					}					
+					
 					if((xmlQuery.length==0)&&(xmlExstension.length==0)){
 						if(xmlElement.attributes[1].nodeValue){
 							return xsdAttr.fn.fetchElement(xmlDoc, xmlElement.attributes[1].nodeValue.split(":")[1], result);
 						}
-					}
+					}			
+														
 					
-					for(i=0; i<xmlQuery.length; i++){
-						var name = xmlQuery[i].attributes.name;
-						result[name.value] = undefined;
-					}
-						
 					if(xmlExstension[0]){
 						var ext = xmlExstension[0].attributes[0].nodeValue;
 						return xsdAttr.fn.fetchElement(xmlDoc, ext.split(":")[1], result); //i'm splitting because 
