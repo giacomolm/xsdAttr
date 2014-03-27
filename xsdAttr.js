@@ -82,7 +82,7 @@
 					}					
 					
 					if((xmlQuery.length==0)&&(xmlExstension.length==0)){
-						if(xmlElement.attributes[1].nodeValue){
+						if(xmlElement.attributes[1] && xmlElement.attributes[1].nodeValue){
 							return xsdAttr.fn.fetchElement(xmlDoc, xmlElement.attributes[1].nodeValue.split(":")[1], result);
 						}
 					}			
