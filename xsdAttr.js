@@ -69,14 +69,16 @@
 					}	
 					
 					for(j=0; j<xmlChoice.length; j++){
-						for(k=0; k<xmlChoice[j].children.length; k++){					
-							if(result.choice == undefined){
-								result.choice= [];
-								result.choice[0] = xmlChoice[j].children[k].attributes[0].nodeValue.split(":")[1];
-							}
-							else{							
-								result.choice[result.choice.length];	
-								result.choice[k] = xmlChoice[j].children[k].attributes[0].nodeValue.split(":")[1];
+						if(xmlChoice[j].children){
+							for(k=0; k<xmlChoice[j].children.length; k++){					
+								if(result.choice == undefined){
+									result.choice= [];
+									result.choice[0] = xmlChoice[j].children[k].attributes[0].nodeValue.split(":")[1];
+								}
+								else{							
+									result.choice[result.choice.length];	
+									result.choice[k] = xmlChoice[j].children[k].attributes[0].nodeValue.split(":")[1];
+								}
 							}
 						}					
 					}					
